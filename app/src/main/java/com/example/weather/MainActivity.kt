@@ -17,13 +17,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Наблюдаем за изменениями в LiveData
-        viewModel.summary.observe(this, Observer { summary ->
-            binding.summaryTextView.text = summary
+        viewModel.temperature.observe(this, Observer { temperature ->
+            binding.summaryTextView.text = temperature.toString()
         })
 
+        viewModel.humidity.observe(this, Observer { humidity ->
+            binding.statisticsTextView.text = humidity.toString()
+        })
 
-        // Обновляем данные по нажатию кнопки
+        viewModel.pressure.observe(this, Observer { pressure ->
+            binding.forecastTextView.text = pressure.toString()
+        })
+
         binding.updateButton.setOnClickListener {
             viewModel.updateWeatherData()
         }

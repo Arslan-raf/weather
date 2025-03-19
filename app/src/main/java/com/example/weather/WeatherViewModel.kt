@@ -12,13 +12,19 @@ class WeatherViewModel : ViewModel() {
     private val _temperature = MutableLiveData<Float>()
     val temperature: LiveData<Float> get() = _temperature
 
+    private val _humidity = MutableLiveData<Float>()
+    val humidity: LiveData<Float> get() = _humidity
 
+    private val _pressure= MutableLiveData<Float>()
+    val pressure: LiveData<Float> get() = _pressure
 
     fun updateWeatherData() {
-        // Получаем новые данные
         val newTemperature = weatherSheet.getTemperature()
         val newHumidity = weatherSheet.getHumidity()
         val newPressure = weatherSheet.getPressure()
 
+        _temperature.value = newTemperature
+        _humidity.value = newHumidity
+        _pressure.value = newPressure
     }
 }
